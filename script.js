@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const { data, error } = await supabaseClient
             .from(SUPABASE_TABLE)
             .select('public_url, media_type, original_name')
-            .order('created_at', { ascending: false });
+            .order('created_at', { ascending: true });
 
         if (error) {
             console.error('Error cargando multimedia desde Supabase:', error.message);
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         data.forEach((item) => {
-            renderMedia(item.public_url, item.media_type, item.original_name || 'recuerdo subido');
+            renderMedia(item.public_url, item.media_type, item.original_name || 'recuerdo subido', true);
         });
     };
 
