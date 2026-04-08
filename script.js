@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!video.muted) video.volume = 1;
     };
 
+    const reverseExistingMediaOrder = () => {
+        const existingItems = Array.from(imageGrid.children);
+        existingItems.reverse().forEach((item) => imageGrid.appendChild(item));
+    };
+
     const renderMedia = (url, mediaType, altText = 'recuerdo subido', newestFirst = false) => {
         const newMediaItem = document.createElement('div');
         newMediaItem.classList.add('foto');
@@ -79,6 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         mainVideo.addEventListener('click', () => toggleVideoMute(mainVideo));
     }
 
+    reverseExistingMediaOrder();
     await loadSavedMedia();
 
     addImageButton.addEventListener('click', () => imageUploadInput.click());
