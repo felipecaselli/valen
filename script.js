@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!video.muted) video.volume = 1;
     };
 
-    const renderMedia = (url, mediaType, altText = 'recuerdo subido') => {
+    const renderMedia = (url, mediaType, altText = 'recuerdo subido', newestFirst = false) => {
         const newMediaItem = document.createElement('div');
         newMediaItem.classList.add('foto');
 
@@ -50,7 +50,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             newMediaItem.appendChild(newImage);
         }
 
-        imageGrid.appendChild(newMediaItem);
+        if (newestFirst) {
+            imageGrid.prepend(newMediaItem);
+        } else {
+            imageGrid.appendChild(newMediaItem);
+        }
     };
 
     const loadSavedMedia = async () => {
@@ -59,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const { data, error } = await supabaseClient
             .from(SUPABASE_TABLE)
             .select('public_url, media_type, original_name')
-            .order('created_at', { ascending: true });
+            .order('created_at', { ascending: false });
 
         if (error) {
             console.error('Error cargando multimedia desde Supabase:', error.message);
@@ -133,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     continue;
                 }
 
-                renderMedia(publicUrl, mediaType, file.name);
+                renderMedia(publicUrl, mediaType, file.name, true);
             }
         } finally {
             addImageButton.disabled = false;
