@@ -1,136 +1,199 @@
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #ffffff;
-    color: #000000;
-    text-align: center;
+:root {
+    --bg-1: #fff4fb;
+    --bg-2: #f3f7ff;
+    --surface: rgba(255, 255, 255, 0.74);
+    --text: #2a2438;
+    --muted: #6e6680;
+    --accent: #ff5ca8;
+    --accent-soft: #ffa8d2;
+    --shadow: 0 20px 45px rgba(97, 73, 124, 0.16);
 }
 
-header {
-    padding: 30px;
-    background-color: #ffffff;
-    border-bottom: 2px solid #9bfeff;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text);
+    background: linear-gradient(150deg, var(--bg-1), var(--bg-2));
+    min-height: 100vh;
+}
+
+.background-glow {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 10% 15%, rgba(255, 144, 194, 0.38), transparent 32%),
+        radial-gradient(circle at 86% 20%, rgba(163, 210, 255, 0.35), transparent 35%),
+        radial-gradient(circle at 54% 82%, rgba(255, 230, 186, 0.36), transparent 34%);
+}
+
+.hero {
+    max-width: 1100px;
+    margin: 28px auto 0;
+    padding: 0 16px;
+}
+
+.hero-content {
+    text-align: center;
+    border-radius: 28px;
+    padding: 42px 28px;
+    background: var(--surface);
+    backdrop-filter: blur(9px);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+.eyebrow {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 h1 {
-    font-size: 2.5em;
-    margin-bottom: 0.3em;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    margin: 14px 0 10px;
 }
 
-.firma {
-    font-style: italic;
-    margin-top: 1em;
-    font-size: 1.2em;
+.hero p {
+    margin: 0;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.page-content {
+    max-width: 1200px;
+    margin: 28px auto 40px;
+    padding: 0 16px;
+}
+
+.gallery-section {
+    border-radius: 26px;
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    padding: 22px;
+}
+
+.section-title-wrap {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.section-title-wrap h2 {
+    margin: 0;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+}
+
+.section-title-wrap p {
+    margin: 8px 0 0;
+    color: var(--muted);
 }
 
 .galeria {
-    background-color: #e8feff;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 12px;
-    padding: 30px;
-    margin: 0 auto;
-    align-items: start;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
 }
 
 .foto {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
     overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    transition: transform 0.5s ease;
-    animation: pinceladas 6s infinite alternate ease-in-out;
+    border-radius: 18px;
+    box-shadow: 0 10px 26px rgba(42, 36, 56, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    transform: translateY(0);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background: #ffffff;
+    padding: 8px;
 }
 
 .foto:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0 16px 34px rgba(42, 36, 56, 0.24);
 }
 
 .foto img,
 .foto video {
-    display: block;
     width: 100%;
     height: auto;
-    object-fit: cover;
-    border-radius: 15px;
-    vertical-align: middle; /* ✅ evita espacios fantasmas */
+    max-height: min(75vh, 680px);
+    display: block;
+    object-fit: contain;
+    border-radius: 12px;
 }
 
-@keyframes pinceladas {
-    0% { filter: hue-rotate(0deg) brightness(1); }
-    50% { filter: hue-rotate(10deg) brightness(1.1); }
-    100% { filter: hue-rotate(-10deg) brightness(0.95); }
-}
-
-footer {
-    padding: 20px;
-    background-color: #ffffff;
-    border-top: 2px solid #9bfeff;
-    margin-top: 40px;
-}
-
-.firma-animada {
-    font-size: 1.3em;
-}
-
-@keyframes latido {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-}
 .foto video {
     cursor: pointer;
 }
 
-/* Estilo básico para el botón de subir imagen */
 .upload-section {
-    text-align: center; /* Centra el botón */
-    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 24px;
 }
 
 #addImageButton {
-    background-color: #ff69b4; /* Color rosa */
-    color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 8px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 12px 24px;
+    border-radius: 999px;
     cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, var(--accent), #ff84be);
+    box-shadow: 0 10px 20px rgba(255, 92, 168, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 #addImageButton:hover {
-    background-color: #ff85c2; /* Rosa un poco más claro al pasar el mouse */
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px rgba(255, 92, 168, 0.42);
+    filter: saturate(1.08);
 }
 
-/* Asegúrate de que las nuevas imágenes sigan el mismo estilo */
-.image-item img {
-    width: 100%;
-    height: 100%; /* Asegura que la imagen llene el contenedor */
-    object-fit: cover; /* Recorta la imagen para que llene el contenedor sin distorsionarse */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+footer {
+    text-align: center;
+    padding: 0 16px 28px;
 }
 
-/* Tu estilo actual de image-grid y image-item debería encargarse del layout */
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ejemplo de tu grid */
-    gap: 15px; /* Espacio entre imágenes */
-    padding: 20px;
-    max-width: 1200px; /* Ancho máximo */
-    margin: 0 auto; /* Centrar la cuadrícula */
+.firma-animada {
+    display: inline-block;
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.1rem;
 }
 
-.image-item {
-    border-radius: 8px;
-    overflow: hidden; /* Importante para que la imagen no se salga de los bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    aspect-ratio: 3/4; /* O la relación de aspecto que tengas para tus imágenes */
-    display: flex; /* Para centrar la imagen si es necesario */
-    justify-content: center;
-    align-items: center;
+@media (max-width: 640px) {
+    .hero-content {
+        padding: 32px 18px;
+        border-radius: 20px;
+    }
+
+    .gallery-section {
+        padding: 14px;
+        border-radius: 20px;
+    }
+
+    .galeria {
+        gap: 10px;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .galeria {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1025px) {
+    .galeria {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }
